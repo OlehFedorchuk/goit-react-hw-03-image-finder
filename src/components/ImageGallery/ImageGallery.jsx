@@ -39,7 +39,7 @@ class ImageGallery extends Component {
   };
 
   handleScroll = () => {
-    const { isLoading, images, totalImages, currentPage, perPage } = this.state;
+    const { isLoading, images, totalImages} = this.state;
     if (!isLoading && images.length < totalImages) {
       const { innerHeight } = window;
       const { scrollHeight, scrollTop } = document.documentElement;
