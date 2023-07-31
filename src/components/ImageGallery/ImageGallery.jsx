@@ -1,10 +1,9 @@
-
 import React, { Component } from 'react';
 import axios from 'axios';
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import Loader from '../Loader/Loader';
 import Button from '../Button/Button';
-import { nanoid } from 'nanoid'
+import { nanoid } from 'nanoid';
 
 class ImageGallery extends Component {
   state = {
@@ -15,8 +14,7 @@ class ImageGallery extends Component {
     perPage: 12,
   };
 
- 
-    componentDidMount() {
+  componentDidMount() {
     this.fetchImages();
     this.addScrollListener();
   }
@@ -33,11 +31,11 @@ class ImageGallery extends Component {
   }
 
   addScrollListener = () => {
-    window.addEventListener('scroll', this.handleScroll);
+    window.addEventListener('load', this.handleScroll);
   };
 
   removeScrollListener = () => {
-    window.removeEventListener('scroll', this.handleScroll);
+    window.removeEventListener('load', this.handleScroll);
   };
 
   handleScroll = () => {
@@ -48,9 +46,7 @@ class ImageGallery extends Component {
       const scrolledToBottom = innerHeight + scrollTop >= scrollHeight;
 
       if (scrolledToBottom) {
-        this.setState({ isLoading: true, currentPage: currentPage + 1 }, () => {
-          this.fetchImages();
-        });
+        this.fetchImages();
       }
     }
   };
@@ -58,16 +54,24 @@ class ImageGallery extends Component {
   fetchImages = () => {
     const { query } = this.props;
     const { currentPage, perPage } = this.state;
-    const apiKey = '37446225-ced4f53dd81a7d760f8a029fd'; 
+    const apiKey = '37446225-ced4f53dd81a7d760f8a029fd';
     const url = `https://pixabay.com/api/?q=${query}&page=${currentPage}&key=${apiKey}&image_type=photo&orientation=horizontal&per_page=${perPage}`;
+
+    this.setState({ isLoading: true });
 
     axios
       .get(url)
       .then(response => {
+        const newImages = response.data.hits.map(image => ({
+          ...image,
+          id: nanoid(),
+        }));
+
         this.setState(prevState => ({
-          images: [...prevState.images, ...response.data.hits],
+          images: [...prevState.images, ...newImages],
           isLoading: false,
           totalImages: response.data.total,
+          currentPage: prevState.currentPage + 1,
         }));
       })
       .catch(error => {
@@ -82,13 +86,13 @@ class ImageGallery extends Component {
     return (
       <div>
         <ul className="gallery">
-          {images.map((image, index) => (
-            <ImageGalleryItem key={nanoid()} image={image} />
+          {images.map(image => (
+            <ImageGalleryItem key={image.id} image={image} onOpenModal={this.props.onOpenModal} />
           ))}
         </ul>
         {isLoading && <Loader />}
         {images.length > 0 && images.length < totalImages && (
-          <Button onClick={this.handleLoadMore} hasMore={!isLoading} />
+          <Button onClick={this.fetchImages} hasMore={!isLoading} />
         )}
       </div>
     );

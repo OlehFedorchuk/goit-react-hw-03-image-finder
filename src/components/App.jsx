@@ -7,13 +7,13 @@ class App extends Component {
   state = {
     searchQuery: '',
     page: 1,
-    perPage: 0, // Змінено на 0
+    perPage: 12,
     showModal: false,
     modalImageUrl: '',
   };
 
   handleSearchSubmit = query => {
-    this.setState({ searchQuery: query, page: 1, perPage: 12 }); // Змінено з perPage: 12 на perPage: 0
+    this.setState({ searchQuery: query, page: 1 });
   };
 
   handleLoadMore = () => {
@@ -29,17 +29,16 @@ class App extends Component {
   };
 
   render() {
-    const { searchQuery, page, perPage, apiKey, showModal, modalImageUrl } = this.state;
+    const { searchQuery, page, perPage, showModal, modalImageUrl } = this.state;
 
     return (
       <div>
         <Searchbar onSubmit={this.handleSearchSubmit} />
-        {searchQuery && ( // Змінено тут, додано умову для завантаження ImageGallery
+        {searchQuery && (
           <ImageGallery
             query={searchQuery}
             page={page}
             perPage={perPage}
-            apiKey={apiKey}
             onLoadMore={this.handleLoadMore}
             onOpenModal={this.handleOpenModal}
           />
