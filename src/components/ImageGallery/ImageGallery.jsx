@@ -4,6 +4,7 @@ import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import Loader from '../Loader/Loader';
 import Button from '../Button/Button';
 import { nanoid } from 'nanoid';
+import PropTypes  from 'prop-types';
 
 class ImageGallery extends Component {
   state = {
@@ -98,5 +99,13 @@ class ImageGallery extends Component {
     );
   }
 }
+
+ImageGallery.propTypes = {
+  query: PropTypes.string.isRequired,
+  page: PropTypes.number.isRequired,
+  perPage: PropTypes.number.isRequired,
+  onLoadMore: PropTypes.func.isRequired,
+  onOpenModal: PropTypes.func.isRequired,
+};
 
 export default ImageGallery;

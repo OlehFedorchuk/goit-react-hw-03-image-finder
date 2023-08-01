@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Button = ({ onClick, hasMore }) => {
   return (
@@ -10,5 +11,8 @@ const Button = ({ onClick, hasMore }) => {
     
   );
 };
-
+Button.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  hasMore: PropTypes.bool.isRequired,
+};
 export default Button;
