@@ -25,8 +25,8 @@ class Modal extends Component {
     const { imageUrl } = this.props;
 
     return (
-      <div className="overlay" onClick={this.handleClick}>
-        <div className="modal">
+      <div className="Overlay" onClick={this.handleClick}>
+        <div className="Modal">
           <img src={imageUrl} alt="" />
         </div>
       </div>

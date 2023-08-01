@@ -85,7 +85,7 @@ class ImageGallery extends Component {
 
     return (
       <div>
-        <ul className="gallery">
+        <ul className="ImageGallery">
           {images.map(image => (
             <ImageGalleryItem key={image.id} image={image} onOpenModal={this.props.onOpenModal} />
           ))}

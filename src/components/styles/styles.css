@@ -15,7 +15,7 @@ body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
         Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
     color: #212121;
-    background-color: #fff;
+    background-color: #ffffff;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -90,7 +90,7 @@ img {
     opacity: 1;
 }
 
-.SearchForm-button-label {
+/* .SearchForm-button-label {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -100,7 +100,7 @@ img {
     white-space: nowrap;
     clip-path: inset(50%);
     border: 0;
-}
+} */
 
 .SearchForm-input {
     display: inline-block;
@@ -204,4 +204,10 @@ img {
 .Button:hover,
 .Button:focus {
     background-color: #303f9f;
+}
+
+.ContainerForBTNloadMore {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
 }

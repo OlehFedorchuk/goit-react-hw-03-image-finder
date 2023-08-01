@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Searchbar from './Searchbar/Searchbar';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Modal from './Modal/Modal';
-
+import './styles/styles.css'
 class App extends Component {
   state = {
     searchQuery: '',
@@ -32,7 +32,7 @@ class App extends Component {
     const { searchQuery, page, perPage, showModal, modalImageUrl } = this.state;
 
     return (
-      <div>
+      <div className='App'>
         <Searchbar onSubmit={this.handleSearchSubmit} />
         {searchQuery && (
           <ImageGallery
