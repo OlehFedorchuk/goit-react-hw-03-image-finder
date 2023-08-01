@@ -20,13 +20,13 @@ class ImageGallery extends Component {
     this.addScrollListener();
   }
 
-  componentDidUpdate(prevProps, prevState) {
+ componentDidUpdate(prevProps) {
     if (prevProps.query !== this.props.query) {
-      this.setState({ images: [], isLoading: false, currentPage: 1 });
-      this.fetchImages();
+      this.setState({ images: [], isLoading: false, currentPage: 1 }, () => {
+        this.fetchImages();
+      });
     }
   }
-
   componentWillUnmount() {
     this.removeScrollListener();
   }
